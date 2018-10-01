@@ -72,8 +72,6 @@
 int remove();
 int system();
 
-
-
 /*
  * Short scalar types.
  * Diavolo reports AIX compiler has bugs with short types.
