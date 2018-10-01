@@ -56,5 +56,3 @@ void	updatePlayerDb		args( (CHAR_DATA *ch) );
 #define LTYPE_OUT               1
 #define LTYPE_NEW               2
 #define LTYPE_AUTO		3
-
-// test
