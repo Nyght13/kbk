@@ -19,13 +19,10 @@
 
 #include "include.h"
 
-struct flag_stat_type
-{
-    const struct flag_type *structure;
-    bool stat;
+struct flag_stat_type {
+  const struct flag_type * structure;
+  bool stat;
 };
-
-
 
 /*****************************************************************************
  Name:		flag_stat_table
@@ -34,43 +31,124 @@ struct flag_stat_type
  		but stats can only be assigned.  Update this table when a
  		new set of flags is installed.
  ****************************************************************************/
-const struct flag_stat_type flag_stat_table[] =
-{
-/*  {	structure		stat	}, */
-    {	area_flags,		FALSE	},
-    {   sex_flags,		TRUE	},
-    {   exit_flags,		FALSE	},
-    {   door_resets,		TRUE	},
-    {   room_flags,		FALSE	},
-    {   sector_flags,		TRUE	},
-    {   type_flags,		TRUE	},
-    {   extra_flags,		FALSE	},
-    {   wear_flags,		FALSE	},
-    {   act_flags,		FALSE	},
-    {   affect_flags,		FALSE	},
-    {   apply_flags,		TRUE	},
-    {   wear_loc_flags,		TRUE	},
-    {   wear_loc_strings,	TRUE	},
-    {   container_flags,	FALSE	},
+const struct flag_stat_type flag_stat_table[] = {
+  /*  {	structure		stat	}, */
+  {
+    area_flags,
+    FALSE
+  },
+  {
+    sex_flags,
+    TRUE
+  },
+  {
+    exit_flags,
+    FALSE
+  },
+  {
+    door_resets,
+    TRUE
+  },
+  {
+    room_flags,
+    FALSE
+  },
+  {
+    sector_flags,
+    TRUE
+  },
+  {
+    type_flags,
+    TRUE
+  },
+  {
+    extra_flags,
+    FALSE
+  },
+  {
+    wear_flags,
+    FALSE
+  },
+  {
+    act_flags,
+    FALSE
+  },
+  {
+    affect_flags,
+    FALSE
+  },
+  {
+    apply_flags,
+    TRUE
+  },
+  {
+    wear_loc_flags,
+    TRUE
+  },
+  {
+    wear_loc_strings,
+    TRUE
+  },
+  {
+    container_flags,
+    FALSE
+  },
 
-/* ROM specific flags: */
+  /* ROM specific flags: */
 
-    {   form_flags,             FALSE   },
-    {   part_flags,             FALSE   },
-    {   ac_type,                TRUE    },
-    {   size_flags,             TRUE    },
-    {   position_flags,         TRUE    },
-    {   off_flags,              FALSE   },
-    {   imm_flags,              FALSE   },
-    {   res_flags,              FALSE   },
-    {   vuln_flags,             FALSE   },
-    {   weapon_class,           TRUE    },
-    {   weapon_type2,            FALSE   },
-    {   apply_types,		TRUE	},
-    {   0,			0	}
+  {
+    form_flags,
+    FALSE
+  },
+  {
+    part_flags,
+    FALSE
+  },
+  {
+    ac_type,
+    TRUE
+  },
+  {
+    size_flags,
+    TRUE
+  },
+  {
+    position_flags,
+    TRUE
+  },
+  {
+    off_flags,
+    FALSE
+  },
+  {
+    imm_flags,
+    FALSE
+  },
+  {
+    res_flags,
+    FALSE
+  },
+  {
+    vuln_flags,
+    FALSE
+  },
+  {
+    weapon_class,
+    TRUE
+  },
+  {
+    weapon_type2,
+    FALSE
+  },
+  {
+    apply_types,
+    TRUE
+  },
+  {
+    0,
+    0
+  }
 };
-    
-
 
 /*****************************************************************************
  Name:		is_stat( table )
@@ -78,20 +156,16 @@ const struct flag_stat_type flag_stat_table[] =
  Called by:	flag_value and flag_string.
  Note:		This function is local and used only in bit.c.
  ****************************************************************************/
-bool is_stat( const struct flag_type *flag_table )
-{
-    int flag;
+bool is_stat(const struct flag_type * flag_table) {
+  int flag;
 
-    for (flag = 0; flag_stat_table[flag].structure; flag++)
-    {
-	if ( flag_stat_table[flag].structure == flag_table
-	  && flag_stat_table[flag].stat )
-	    return TRUE;
-    }
-    return FALSE;
+  for (flag = 0; flag_stat_table[flag].structure; flag++) {
+    if (flag_stat_table[flag].structure == flag_table &&
+      flag_stat_table[flag].stat)
+      return TRUE;
+  }
+  return FALSE;
 }
-
-
 
 /*
  * This function is Russ Taylor's creation.  Thanks Russ!
@@ -104,18 +178,17 @@ bool is_stat( const struct flag_type *flag_table )
  Called by:	flag_value and flag_string.
  Note:		This function is local and used only in bit.c.
  ****************************************************************************/
-int flag_lookup2 (const char *name, const struct flag_type *flag_table)
-{
-    int flag;
- 
-    for (flag = 0; flag_table[flag].name != NULL; flag++)
-    {
-        if ( !str_cmp( name, flag_table[flag].name )
-          && flag_table[flag].settable )
-            return flag_table[flag].bit;
-    }
- 
-    return NO_FLAG;
+int flag_lookup2(const char * name,
+  const struct flag_type * flag_table) {
+  int flag;
+
+  for (flag = 0; flag_table[flag].name != NULL; flag++) {
+    if (!str_cmp(name, flag_table[flag].name) &&
+      flag_table[flag].settable)
+      return flag_table[flag].bit;
+  }
+
+  return NO_FLAG;
 }
 
 /*****************************************************************************
@@ -123,74 +196,63 @@ int flag_lookup2 (const char *name, const struct flag_type *flag_table)
  Purpose:	Returns the value of the flags entered.  Multi-flags accepted.
  Called by:	olc.c and olc_act.c.
  ****************************************************************************/
-int flag_value( const struct flag_type *flag_table, char *argument)
-{
-    char word[MAX_INPUT_LENGTH];
-    int  bit;
-    int  marked = 0;
-    bool found = FALSE;
+int flag_value(const struct flag_type * flag_table, char * argument) {
+  char word[MAX_INPUT_LENGTH];
+  int bit;
+  int marked = 0;
+  bool found = FALSE;
 
-    if ( is_stat( flag_table ) )
-    {
-	one_argument( argument, word );
+  if (is_stat(flag_table)) {
+    one_argument(argument, word);
 
-	if ( ( bit = flag_lookup2( word, flag_table ) ) != NO_FLAG )
-	    return bit;
-	else
-	    return NO_FLAG;
-    }
-
-    /*
-     * Accept multiple flags.
-     */
-    for (; ;)
-    {
-        argument = one_argument( argument, word );
-
-        if ( word[0] == '\0' )
-	    break;
-
-        if ( ( bit = flag_lookup2( word, flag_table ) ) != NO_FLAG )
-        {
-            SET_BIT( marked, bit );
-            found = TRUE;
-        }
-    }
-
-    if ( found )
-	return marked;
+    if ((bit = flag_lookup2(word, flag_table)) != NO_FLAG)
+      return bit;
     else
-	return NO_FLAG;
+      return NO_FLAG;
+  }
+
+  /*
+   * Accept multiple flags.
+   */
+  for (;;) {
+    argument = one_argument(argument, word);
+
+    if (word[0] == '\0')
+      break;
+
+    if ((bit = flag_lookup2(word, flag_table)) != NO_FLAG) {
+      SET_BIT(marked, bit);
+      found = TRUE;
+    }
+  }
+
+  if (found)
+    return marked;
+  else
+    return NO_FLAG;
 }
-
-
 
 /*****************************************************************************
  Name:		flag_string( table, flags/stat )
  Purpose:	Returns string with name(s) of the flags or stat entered.
  Called by:	act_olc.c, olc.c, and olc_save.c.
  ****************************************************************************/
-char *flag_string( const struct flag_type *flag_table, int bits )
-{
-    static char buf[512];
-    int  flag;
+char * flag_string(const struct flag_type * flag_table, int bits) {
+  static char buf[512];
+  int flag;
 
-    buf[0] = '\0';
+  buf[0] = '\0';
 
-    for (flag = 0; flag_table[flag].name != NULL; flag++)
-    {
-	if ( !is_stat( flag_table ) && IS_SET(bits, flag_table[flag].bit) )
-	{
-	    strcat( buf, " " );
-	    strcat( buf, flag_table[flag].name );
-	}
-	else
-	if ( flag_table[flag].bit == bits )
-	{
-	    strcat( buf, " " );
-	    strcat( buf, flag_table[flag].name );
-	    break;
-	}
+  for (flag = 0; flag_table[flag].name != NULL; flag++) {
+    if (!is_stat(flag_table) && IS_SET(bits, flag_table[flag].bit)) {
+      strcat(buf, " ");
+      strcat(buf, flag_table[flag].name);
+    } else
+    if (flag_table[flag].bit == bits) {
+      strcat(buf, " ");
+      strcat(buf, flag_table[flag].name);
+      break;
     }
-    return (buf[0] != '\0') ? buf+1 : "none";
+  }
+  return (buf[0] != '\0') ? buf + 1 : "none";
 }
