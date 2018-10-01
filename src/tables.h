@@ -22,24 +22,22 @@
 *	    Gabrielle Taylor (gtaylor@pacinfo.com)			   *
 *	    Brian Moore (rom@rom.efn.org)				   *
 *	By using this code, you have agreed to follow the terms of the	   *
-*	ROM license, in the file Tartarus/doc/rom.license                  *
+*	ROM license, in the file Tartarus/doc/rom.license                       *
 ***************************************************************************/
 
 /***************************************************************************
 *       Tartarus code is copyright (C) 1997-1998 by Daniel Graham          *
-*	In using this code you agree to comply with the Tartarus license   *
+*	In using this code you agree to comply with the Tartarus license   	   *
 *       found in the file /Tartarus/doc/tartarus.doc                       *
 ***************************************************************************/
 
-struct flag_type
-{
+struct flag_type {
     char *name;
     int bit;
     bool settable;
 };
 
-struct cabal_type
-{
+struct cabal_type {
     char 	*name;
     char 	*who_name;
     char	*long_name;
@@ -53,59 +51,50 @@ struct cabal_type
     bool	induct;
 };
 
-struct cabal_restr_type
-{
+struct cabal_restr_type {
     bool    acc_class[MAX_CLASS];
     bool    acc_race[MAX_PC_RACE];
     int     acc_align;
     int     acc_ethos;
 };
 
-struct cabal_message
-{
+struct cabal_message {
     char *login;
     char *logout;
     char *entrygreeting;
 };
 
 
-struct position_type
-{
+struct position_type {
     char *name;
     char *short_name;
 };
 
-struct sex_type
-{
+struct sex_type {
     char *name;
 };
 
-struct size_type
-{
+struct size_type {
     char *name;
 };
 
-/*struct empire_type
-{
+/*struct empire_type {
     char 	*name;
     char 	*who_name;
 };
 */
 
-struct style_type
-{
+struct style_type {
     long bit;
     char *name;
 };
 
-struct color_type
-{
+struct color_type {
 	char *color_name;
 	char *color_ascii;
 };
 
-struct color_event_type
-{
+struct color_event_type {
 	char *event_name;
 	char *default_color;
 	int min_level;
@@ -113,15 +102,13 @@ struct color_event_type
 
 extern  const   struct  flag_type       aftype_table[];
 
-struct display_type
-{
+struct display_type {
     char *name;
     long bit;
     char *display;
 };
 
-struct hometown_type
-{
+struct hometown_type {
 	char *name;
 	int recall;
 	int pit;
@@ -130,15 +117,13 @@ struct hometown_type
 	int restrict;
 };
 
-struct bounty_type
-{
+struct bounty_type {
     char *rank_name;
     char *rank_extitle;
     int credits_required;
 };
 
-struct quest_reward
-{
+struct quest_reward {
     char *  	keyword;
     int     	price;
     int		type;
@@ -153,15 +138,13 @@ struct quest_reward
     FUNC * 	function;
 };
 
-struct set_type
-{
+struct set_type {
     int		set;
     char *	setName;
     SET_ITEM_PROG *	function;
 };
 
-struct sector_type
-{
+struct sector_type {
     char *	name;
     sh_int	flag;
     int		move;
@@ -174,18 +157,19 @@ struct sector_type
 extern  const   struct  cabal_type      	cabal_table[MAX_CABAL];
 extern  const   struct  cabal_restr_type  	cabal_restr_table[MAX_CABAL];
 extern	const	struct	position_type		position_table[];
-extern	const	struct	sex_type		sex_table[];
-extern	const	struct	size_type		size_table[];
+extern	const	struct	sex_type			sex_table[];
+extern	const	struct	size_type			size_table[];
 extern  const   struct  empire_type     	empire_table[MAX_EMPIRE];
-extern  const   struct  color_type		color_table[MAX_COLORS];
+extern  const   struct  color_type			color_table[MAX_COLORS];
 extern  const   struct  color_event_type	color_event[MAX_EVENTS];
 extern  const   struct  cabal_message   	cabal_messages[MAX_CABAL];
 extern  const   struct  hometown_type		hometown_table[MAX_HOMETOWN];
 extern  const   struct  display_type    	apply_locations[];
-extern  const   struct  bounty_type		bounty_table[MAX_BOUNTY];
+extern  const   struct  bounty_type			bounty_table[MAX_BOUNTY];
 extern  const   struct  quest_reward		quest_reward_table[MAX_QUEST_REWARDS];
-extern  const   struct  set_type		set_type_table[MAX_SET_TYPES];
-extern  const	struct	sector_type		sector_table[SECT_MAX];
+extern  const   struct  set_type			set_type_table[MAX_SET_TYPES];
+extern  const	struct	sector_type			sector_table[SECT_MAX];
+
 /* swarrior */
 extern  const   struct  style_type      style_table[];
 
@@ -231,14 +215,14 @@ extern	const	struct	bit_type	bitvector_type[];
 extern  const   struct  flag_type	direction_table[];
 extern  const   struct  flag_type	area_type_table[];
 
-extern const struct bit_type bitvector_type[];
-extern const struct flag_type room_flags[];
-extern const struct flag_type area_flags[];
-extern const struct flag_type sector_flags[];
-extern const struct flag_type wear_loc_strings[];
-extern const struct flag_type wear_loc_flags[];
-extern const struct flag_type door_resets[];
+extern 	const 	struct 	bit_type 	bitvector_type[];
+extern 	const 	struct 	flag_type 	room_flags[];
+extern 	const 	struct 	flag_type 	area_flags[];
+extern 	const 	struct	flag_type 	sector_flags[];
+extern 	const 	struct 	flag_type 	wear_loc_strings[];
+extern 	const 	struct 	flag_type 	wear_loc_flags[];
+extern 	const 	struct 	flag_type 	door_resets[];
 
-extern  const   struct  flag_type       mprog_flags[];
+extern  const   struct  flag_type   mprog_flags[];
 
 char * bitmask_string args(( BITMASK *bm, const struct flag_type *flags ));
