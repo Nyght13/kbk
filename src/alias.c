@@ -178,6 +178,7 @@ void do_alias(CHAR_DATA * ch, char * argument) {
   send_to_char(buf, ch);
 }
 
+/* Why, for the love of god, are there no comments? */
 void do_unalias(CHAR_DATA * ch, char * argument) {
   CHAR_DATA * rch;
   char arg[MAX_INPUT_LENGTH];
